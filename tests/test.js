@@ -7,6 +7,8 @@ export const options = {
 
 export default function () {
     var body = "{\"orderId\":1619286267885355876}"
+    console.log(body)
+
     var orderId = order.getOrderID(body)
     console.log(orderId)
 }
