@@ -11,18 +11,21 @@ func init() {
 	modules.Register("k6/x/order", New())
 }
 
-func New() *Order {
-	return &Order{}
+type Module struct{}
+
+func New() *Module {
+	return &Module{}
 }
 
 type Order struct {
 	OrderID int64 `json:"orderId"`
 }
 
-func (o *Order) GetOrderID(body string) string {
-	err := json.Unmarshal([]byte(body), &o)
+func (m *Module) GetOrderID(body string) string {
+	var order Order
+	err := json.Unmarshal([]byte(body), &order)
 	if err != nil {
 		println(err)
 	}
-	return strconv.FormatInt(int64(o.OrderID), 10)
+	return strconv.FormatInt(int64(order.OrderID), 10)
 }
