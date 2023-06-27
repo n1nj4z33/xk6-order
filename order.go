@@ -29,3 +29,16 @@ func (m *Module) GetOrderID(body string) string {
 	}
 	return strconv.FormatInt(int64(order.OrderID), 10)
 }
+
+func (m *Module) GetOrderIDS(body string) []string {
+	var orders []Order
+	err := json.Unmarshal([]byte(body), &orders)
+	if err != nil {
+		println(err)
+	}
+	ids := make([]string, len(orders))
+	for i, order := range orders {
+		ids[i] = strconv.FormatInt(int64(order.OrderID), 10)
+	}
+	return ids
+}
